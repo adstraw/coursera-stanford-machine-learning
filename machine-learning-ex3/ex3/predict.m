@@ -7,8 +7,11 @@ function p = predict(Theta1, Theta2, X)
 m = size(X, 1);
 num_labels = size(Theta2, 1);
 
+a2 = sigmoid([ones(m, 1) X] * Theta1');
+a3 = sigmoid([ones(m, 1) a2] * Theta2');
+
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
+[pval p] = max(a3, [], 2);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
