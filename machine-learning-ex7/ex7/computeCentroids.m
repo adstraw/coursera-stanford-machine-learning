@@ -26,8 +26,12 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
+eyeK = eye(K);
+idxmatrix = eyeK(idx,:); % m x k
+centroids = (X' * idxmatrix)'; % (n x m * m x k = n x k)' = k x n
+for k = 1:K
+  centroids(k, :) = centroids(k, :) / sum(idxmatrix(:, k));
+end
 
 
 
