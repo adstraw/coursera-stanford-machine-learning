@@ -40,12 +40,16 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+# non-regularization
+error = ((X * Theta') - Y) .* R; % num_movies x num_users
+J = sum(sum(error .^ 2)) / 2;
+X_grad = error * Theta; % num_movies x num_features
+Theta_grad = error' * X; % num_users x num_features
 
-
-
-
-
-
+# regularization
+J = J + (lambda / 2) * (sum(sum(Theta .* Theta)) + sum(sum(X .* X)));
+X_grad = X_grad + lambda * X;
+Theta_grad = Theta_grad + lambda * Theta;
 
 
 
